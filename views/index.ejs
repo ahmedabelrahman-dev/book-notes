@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📚 Book Notes</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>📚 Book Notes</h1>
+
+    <!-- Book Search Form -->
+    <form class="search-form" action="/add" method="POST">
+      <input
+        type="text"
+        name="query"
+        placeholder="Search by title or ISBN"
+        required
+      />
+      <button type="submit">Add Book</button>
+    </form>
+
+    <!-- Books Grid -->
+    <div class="books-grid">
+      <% books.forEach(book => { %>
+        <div class="book-card">
+          <img src="<%= book.cover_url %>" alt="Book cover" class="cover" />
+          <div class="card-content">
+            <h2><%= book.title %></h2>
+            <p>by <strong><%= book.author %></strong></p>
+
+            <!-- Delete Form -->
+            <form action="/delete" method="POST" class="card-action">
+              <input type="hidden" name="bookId" value="<%= book.id %>" />
+              <button type="submit" class="btn delete">🗑️ Delete</button>
+            </form>
+
+            <!-- Edit Form -->
+            <form action="/edit" method="POST" class="card-action edit-form">
+              <input type="hidden" name="bookId" value="<%= book.id %>" />
+              <input
+                type="text"
+                name="newTitle"
+                value="<%= book.title %>"
+                required
+              />
+              <button type="submit" class="btn edit">✏️ Edit</button>
+            </form>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+
+    <footer>
+      Made with 💙 using Node.js & Open Library API
+    </footer>
+  </div>
+</body>
+</html>
