@@ -45,7 +45,7 @@ app.post("/add", async (req, res) => {
       return res.send("No book found.");
   
     }
-    console.log("Book data from API:", bookData.cover_i,
+    console.log(
       "title:", bookData.title,
       "author_name:", bookData.author_name,
       "cover_i:", bookData.cover_i
