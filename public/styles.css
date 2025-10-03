@@ -10,13 +10,24 @@
   --container: 1100px;
 }
 
+/* Light theme overrides */
+[data-theme="light"]{
+  --bg: #f6f8fb;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #6b46ff;
+  --accent-2: #0ea5a3;
+  --surface: #ffffff;
+  --glass: rgba(10,10,10,0.04);
+}
+
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  background: linear-gradient(180deg, #071026 0%, #071827 100%);
-  color: #e6eef8;
+  background: linear-gradient(180deg, var(--bg) 0%, rgba(10,10,10,0.02) 100%);
+  color: color-mix(in srgb, var(--surface) 80%, white 20%);
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
@@ -59,6 +70,30 @@ h1{
   align-items:center;
   justify-content:flex-end;
 }
+
+/* Toggle in top-left corner */
+.theme-toggle-wrap{
+  position:fixed;
+  top:14px;
+  left:14px;
+  z-index:1200;
+}
+
+.theme-btn{
+  display:inline-grid;
+  place-items:center;
+  width:44px;height:44px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.06);
+  background:var(--glass);
+  color:var(--accent);
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(2,6,23,0.55);
+}
+
+.theme-btn:focus{outline:2px solid rgba(124,92,255,0.25);outline-offset:3px}
+
+.theme-btn:hover{transform:translateY(-1px)}
 
 .search-form input[type="text"],
 .edit-form input[type="text"]{

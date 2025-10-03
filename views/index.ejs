@@ -1,34 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>📚 Book Notes</title>
   <link rel="stylesheet" href="/styles.css" />
 </head>
+
 <body>
   <div class="container">
-    <h1>📚 Book Notes</h1>
+    <header class="site-header">
+      <h1><span class="brand-badge">📚</span> Book Notes</h1>
+      <!-- Theme toggle -->
+      <div class="theme-toggle-wrap">
+        <button id="theme-toggle" aria-label="Toggle theme" class="theme-btn">
+          <!-- simple sun/moon SVG -->
+          <svg id="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true">
+            <path id="theme-path" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
 
     <!-- Book Search Form -->
     <form class="search-form" action="/add" method="POST">
-      <input
-        type="text"
-        name="query"
-        placeholder="Search by title or ISBN"
-        required
-      />
+      <input type="text" name="query" placeholder="Search by title or ISBN" required />
       <button type="submit">Add Book</button>
     </form>
 
     <!-- Books Grid -->
     <div class="books-grid">
-      <% books.forEach(book => { %>
+      <% books.forEach(book=> { %>
         <div class="book-card">
           <img src="<%= book.cover_url %>" alt="Book cover" class="cover" />
           <div class="card-content">
-            <h2><%= book.title %></h2>
-            <p>by <strong><%= book.author %></strong></p>
+            <h2>
+              <%= book.title %>
+            </h2>
+            <p>by <strong>
+                <%= book.author %>
+              </strong></p>
 
             <!-- Delete Form -->
             <form action="/delete" method="POST" class="card-action">
@@ -39,17 +52,12 @@
             <!-- Edit Form -->
             <form action="/edit" method="POST" class="card-action edit-form">
               <input type="hidden" name="bookId" value="<%= book.id %>" />
-              <input
-                type="text"
-                name="newTitle"
-                value="<%= book.title %>"
-                required
-              />
+              <input type="text" name="newTitle" value="<%= book.title %>" required />
               <button type="submit" class="btn edit">✏️ Edit</button>
             </form>
           </div>
         </div>
-      <% }) %>
+        <% }) %>
     </div>
 
     <footer>
@@ -57,4 +65,6 @@
     </footer>
   </div>
 </body>
+<script src="/theme-toggle.js"></script>
+
 </html>
